@@ -130,16 +130,27 @@ OS-licensed font; no sim-specific font was carried over.
    `klunlInitEqn()` is therefore left at the foundation's no-op default and
    no MathJax script is loaded, avoiding an unnecessary external/CDN
    dependency the hard rules otherwise forbid.
-4. **Layout: description paragraph placed beside, not strictly below, the
-   controls on desktop widths.** The screenshot (`Capture.PNG`) stacks
-   "pulsar motion" / pause+speed / color checkbox / description paragraph
-   in one vertical column. The KL-UNL foundation's `.controls-panel` class
-   is a ready-made two-column (25rem controls / 1fr help text) pattern that
-   avoids a large empty right-hand gap at desktop widths; the sim uses it
-   with controls on the left and the paragraph on the right, collapsing to
-   the screenshot's single-column stacked order automatically below 56rem
-   (the foundation's own responsive breakpoint). Reading/tab order is
-   unaffected (DOM order still is: fieldsets, then paragraph).
+4. **Layout: compact single box with controls overlaid on the stage.** The
+   original (`Capture.PNG`) is one box — the orbit top-left, the plot
+   top-right, and the controls (pulsar-motion radios / pause+speed / color
+   checkbox / description paragraph) tucked into the lower-left, over the
+   empty stage area. This port reproduces that: a single `.panel` holds the
+   `<canvas>` with the control cluster absolutely positioned in the stage's
+   lower-left (`.stage-controls`, at ~2.5%/63% of the scaling stage, measured
+   against the original cluster's stage coords x 26-408, y 390-573). The
+   lower-left stays clear of graphics: the orbit is top-left, the plot
+   top-right, and the pulse trail runs from the orbit down to earth
+   (bottom-right), passing above/right of the cluster (verified: zero pulse
+   pixels render behind the controls even with a full circular-mode trail).
+   The controls remain native semantic elements (real `<fieldset>`/radio/
+   button/range/checkbox), so keyboard and screen-reader access are
+   unaffected and tab order follows DOM order. For accessibility priority
+   over visual fidelity, below the foundation's 56rem breakpoint (narrow /
+   phone-portrait, and equivalently at high browser zoom) the overlay drops
+   to `position: static` and the controls reflow into a normal stacked block
+   below the canvas, so nothing clips or overlaps. The per-panel diagram
+   heading is present but `.sr-only` (the original box has no visible
+   heading), keeping the compact look while preserving heading structure.
 5. **Reduced motion**: see ACCESSIBILITY.md — the animation does not
    auto-start when the user has requested reduced motion, even though the
    original always starts running.
