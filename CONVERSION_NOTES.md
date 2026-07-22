@@ -124,6 +124,17 @@ OS-licensed font; no sim-specific font was carried over.
    `"pulsarPeriodSim001"` entry sits out of alphabetical order in the
    master file (between `renaissancePtolemaic` and `radecdemo`); this
    preexisting ordering issue was left untouched as out of scope.
+   - **About text updated to the Apache 2.0 license (user request).** In
+     this project's copied `contents.json`, the `about` content's closing
+     sentence — the old "Permission is granted … noncommercial purposes …
+     unmodified" boilerplate — was replaced with the Apache License 2.0
+     block (copyright line, license grant, the license URL as a link, and
+     the AS-IS disclaimer). The standard NSF funding line (grants #0231270
+     / #0404988), which this entry had been missing, was added to match the
+     sibling entries and the reference layout, and the previously unclosed
+     `<a>` around "Nebraska Astronomy Applet Project" was closed so only
+     that phrase links to astro.unl.edu. Confined to `html5/foundation/
+     contents.json`; the shared master copy is untouched.
 3. **No MathJax.** The original UI has no formulas, symbols, Greek letters,
    or unit-bearing numeric readouts anywhere (confirmed: no `TextField`
    creation, no `toFixed`/scientific-notation formatting in the source).
